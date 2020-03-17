@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="sign">
+      <div class="header">
+          <i class="el-icon-arrow-left backImg" @click="goBack"></i>
+          <span class="title">个人签名</span>
+      </div>
+      <section class="signature">
+          <div class="signatureBox">
+              <div class="canvasBox" ref="canvasHW">
+                  <canvas ref="canvasF" class="canvasStyle" @touchstart='touchStart' @touchmove='touchMove' @touchend='touchEnd' @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseUp"></canvas>
+              </div>
+          </div>
+      </section>
+      <div class="btnBox">
+          <div @click="overwrite" class="btn1">重置</div>
+          <div @click="commit" class="btn1">确定</div>
+      </div>
+      <div class="imglist-box" :style="imgUrlList.length>0 ? 'border: 1px solid #d9d9d9;' : ''">
+        <img v-for="i in imgUrlList" class="imgCanvas" :src="i">
+        <img v-show="imgUrlList.length>0" src="../../assets/img/signdelete.png" class="resign" @click="deleteAll">
+      </div>
+      <div class="tijiao-box">
+        <button @click="commitAll" class="tijiao">提 交</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    stageInfo:'',
+        imgUrl:'',
+        imgUrlList:[],
+        client: {},
+        points: [],
+        canvasTxt: null,
+        startX: 0,
+        startY: 0,
+        moveY: 0,
+        moveX: 0,
+        endY: 0,
+        endX: 0,
+        w: null,
+        h: null,
+        isDown: false,
+        isViewAutograph: this.$route.query.isViews > 0,
+        contractSuccess: this.$route.query.contractSuccess,
+  }
+})
+  </script>
+</body>
+</html>
